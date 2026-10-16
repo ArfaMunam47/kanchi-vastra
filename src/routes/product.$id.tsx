@@ -28,9 +28,9 @@ function ProductPage() {
 function ProductView() {
   const p = Route.useLoaderData();
   const { add } = useBag();
-  const [color, setColor] = useState(p.colors[0]);
-  const [view, setView] = useState(p.colors[0].image);
-  const [size, setSize] = useState(sizes[0]);
+  const [color, setColor] = useState(p.colors[0]!);
+  const [view, setView] = useState(p.colors[0]!.image);
+  const [size, setSize] = useState(sizes[0]!);
   const [qty, setQty] = useState(1);
   const views = [color.image, ...p.gallery.filter((g) => g !== color.image)];
 
