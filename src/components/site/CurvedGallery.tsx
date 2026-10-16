@@ -56,7 +56,7 @@ export function CurvedGallery() {
                 onClick={(e) => { if (st.current.moved > 6) e.preventDefault(); }}
                 className="group absolute left-1/2 top-1/2 h-[90%] w-[min(300px,60vw)] overflow-hidden"
                 style={{ transform: `translate(-50%,-50%) translate3d(${x}px,0,${z}px) rotateY(${a * 57.3}deg)`, opacity: 1 - Math.abs(d) * 0.12, zIndex: 100 - Math.round(Math.abs(d) * 10) }}>
-                <img src={p.colors[0].image} alt={p.name} draggable={false} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={p.colors[0]!.image} alt={p.name} draggable={false} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent p-5 text-primary-foreground">
                   <p className="eyebrow text-gold">{p.category}</p>
                   <p className="font-display text-2xl">{p.name}</p>

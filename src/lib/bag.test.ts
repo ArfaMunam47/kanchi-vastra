@@ -14,6 +14,6 @@ describe("bag", () => {
   it("sorts by price ascending and filters category", () => {
     const r = filterSort(products, "Bridal", "price-asc");
     expect(r.every((p) => p.category === "Bridal")).toBe(true);
-    expect(r[0].price).toBeLessThan(r[1].price);
+    expect(r[0]!.price).toBeLessThan(r[1]!.price);
   });
 });
