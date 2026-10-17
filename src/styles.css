@@ -117,6 +117,11 @@
 .gallery-section { height: 300svh; }
 .collection-image { transition: transform 1.2s ease; }
 .collection-link:hover .collection-image { transform: scale(1.035); }
+.collection-heritage, .collection-festive { background: var(--burgundy); color: var(--primary-foreground); }
+.collection-gold, .collection-ivory { background: var(--ivory); color: var(--foreground); }
+.collection-temple { background: var(--secondary); color: var(--foreground); }
+.collection-modern { background: var(--card); color: var(--foreground); }
+@media (min-width: 768px) { .collection-reverse > :first-child { order: 2; } }
 @media (max-width: 767px) {
   .entrance-section { height: 230svh; }
   .gallery-section { height: 250svh; }
