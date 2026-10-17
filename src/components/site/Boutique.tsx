@@ -40,7 +40,7 @@ export function Boutique() {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/70 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 top-8 text-center transition-opacity" style={{opacity: Math.max(0,1-position*4)}}>
           <p className="eyebrow text-primary">The Saree Atelier</p>
-          <h1 className="mt-2 text-4xl text-burgundy md:text-6xl">KANCHI VASTRA</h1>
+          <h1 className="mt-2 text-4xl text-gold md:text-6xl">KANCHI VASTRA</h1>
         </div>
         <div className="absolute bottom-12 inset-x-6 flex flex-col items-center text-center text-primary-foreground">
           {position < .45 ? <><p className="font-script text-4xl md:text-5xl">A world woven in silk</p><Button onClick={enter} variant="outline" className="mt-6 h-12 rounded-none border-gold bg-ink/60 px-7 text-primary-foreground hover:bg-burgundy hover:text-primary-foreground">Enter the atelier <ArrowRight /></Button></> : <><p className="font-script text-4xl md:text-5xl">Welcome to our world</p><Button variant="ghost" onClick={() => document.getElementById("gallery")?.scrollIntoView({behavior:"smooth"})} className="mt-5 text-primary-foreground">Discover the exhibition <ArrowDown /></Button></>}

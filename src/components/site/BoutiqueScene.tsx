@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { images } from "@/lib/products";
+import silkTexture from "@/assets/silk-texture.jpg";
 
 export default function BoutiqueScene({ progress, onReady, onError }: { progress: React.RefObject<number>; onReady: () => void; onError: () => void }) {
   const mount = useRef<HTMLDivElement>(null);
@@ -15,7 +16,7 @@ export default function BoutiqueScene({ progress, onReady, onError }: { progress
         if (!ctx) return new T.Color();
         ctx.fillStyle=css.getPropertyValue(name).trim(); ctx.fillRect(0,0,1,1);
         const pixel=ctx.getImageData(0,0,1,1).data;
-        return new T.Color().setRGB(pixel[0]/255,pixel[1]/255,pixel[2]/255,T.SRGBColorSpace);
+        return new T.Color().setRGB((pixel[0] ?? 0)/255,(pixel[1] ?? 0)/255,(pixel[2] ?? 0)/255,T.SRGBColorSpace);
       };
       let renderer: InstanceType<typeof T.WebGLRenderer>;
       try { renderer = new T.WebGLRenderer({ antialias: true, alpha: false }); } catch { onError(); return; }
@@ -53,6 +54,17 @@ export default function BoutiqueScene({ progress, onReady, onError }: { progress
         box(.06,.5,.15,-side*.2,2.55,.2,gold,group); return group;
       });
       const loader = new T.TextureLoader(); const textures: InstanceType<typeof T.Texture>[] = [];
+      const silk = loader.load(silkTexture); silk.colorSpace=T.SRGBColorSpace; textures.push(silk);
+      const fabric = new T.MeshStandardMaterial({map:silk,side:T.DoubleSide,roughness:.65});
+      const cloth = (x: number,z: number) => {
+        const geo=new T.PlaneGeometry(1.4,2.6,32,24); const verts=geo.attributes.position;
+        for(let i=0;i<verts.count;i++) { const vx=verts.getX(i),vy=verts.getY(i); verts.setZ(i,Math.sin(vx*17)*.075+(1.3-vy)*.03); }
+        geo.computeVertexNormals(); const m=new T.Mesh(geo,fabric); m.position.set(x,2.5,z); scene.add(m);
+        box(1.6,.04,.04,x,3.85,z,gold); box(.04,3.8,.04,x-.8,1.9,z,gold); box(.04,3.8,.04,x+.8,1.9,z,gold);
+      };
+      cloth(-3.3,-3.5); cloth(3.3,-3.5); cloth(-3.3,-8); cloth(3.3,-8);
+      const campaign=loader.load(images.s6); campaign.colorSpace=T.SRGBColorSpace; textures.push(campaign);
+      const artwork=new T.Mesh(new T.PlaneGeometry(3.6,4.5),new T.MeshBasicMaterial({map:campaign})); artwork.position.set(0,3.1,-14.8); scene.add(artwork);
       const photos = Object.values(images);
       photos.forEach((url,i) => {
         const tex = loader.load(url); tex.colorSpace = T.SRGBColorSpace; textures.push(tex);
@@ -76,13 +88,14 @@ export default function BoutiqueScene({ progress, onReady, onError }: { progress
       for(let i=0;i<12;i++) box(11,.012,.022,0,.015,2-i*1.5,gold);
       let raf = 0; let px=0, py=0;
       const move = (e: PointerEvent) => { px=e.clientX/innerWidth-.5; py=e.clientY/innerHeight-.5; };
-      const resize = () => { const {width,height}=host.getBoundingClientRect(); renderer.setSize(width,height); camera.aspect=width/height; camera.updateProjectionMatrix(); };
+      const resize = () => { const {width,height}=host.getBoundingClientRect(); renderer.setSize(width,height); camera.aspect=width/height; camera.fov=width<600 ? 62 : 48; camera.updateProjectionMatrix(); };
       const observer = new ResizeObserver(resize); observer.observe(host); resize();
       const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const tick = () => {
         const p = progress.current;
-        const opening = Math.min(1,p*2.8); doors[0].rotation.y=-opening*1.55; doors[1].rotation.y=opening*1.55;
-        camera.position.set(reduced ? 0 : px*.25,2.65+(reduced ? 0 : py*.1),11-p*20);
+        const opening = Math.min(1,p*2.8); doors.forEach((door,i) => {door.rotation.y=(i===0 ? -1 : 1)*opening*1.55;});
+        const start=camera.aspect<.65 ? 14 : 11;
+        camera.position.set(reduced ? 0 : px*.25,2.65+(reduced ? 0 : py*.1),start-p*(start+1.5));
         camera.lookAt(0,2.55,-14); renderer.render(scene,camera); raf=requestAnimationFrame(tick);
       };
       host.addEventListener("pointermove",move); tick(); onReady();
