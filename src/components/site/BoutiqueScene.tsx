@@ -9,13 +9,14 @@ export default function BoutiqueScene({ progress, onReady, onError }: { progress
       const host = mount.current;
       if (!host || disposed) return;
       const css = getComputedStyle(document.documentElement);
-      const color = (name: string) => new T.Color(css.getPropertyValue(name).trim());
-      // Canvas color conversion handles OKLCH through the browser's computed color.
       const resolve = (name: string) => {
-        const el = document.createElement("span"); el.style.color = `var(${name})`; document.body.appendChild(el);
-        const c = new T.Color(getComputedStyle(el).color); el.remove(); return c;
+        const canvas = document.createElement("canvas"); canvas.width=1; canvas.height=1;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return new T.Color();
+        ctx.fillStyle=css.getPropertyValue(name).trim(); ctx.fillRect(0,0,1,1);
+        const pixel=ctx.getImageData(0,0,1,1).data;
+        return new T.Color().setRGB(pixel[0]/255,pixel[1]/255,pixel[2]/255,T.SRGBColorSpace);
       };
-      void color;
       let renderer: InstanceType<typeof T.WebGLRenderer>;
       try { renderer = new T.WebGLRenderer({ antialias: true, alpha: false }); } catch { onError(); return; }
       renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
