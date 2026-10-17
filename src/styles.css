@@ -32,6 +32,7 @@
   --color-ivory: var(--ivory);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
+  --color-wood: var(--wood);
   --font-display: "Cormorant Garamond", serif;
   --font-sans: "Jost", sans-serif;
   --font-script: "Pinyon Script", cursive;
@@ -62,12 +63,14 @@
   --ivory: oklch(0.975 0.008 85);
   --gold: oklch(0.74 0.13 80);
   --ink: oklch(0.15 0.02 20);
+  --wood: oklch(0.38 0.06 45);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
   body {
+    margin: 0;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -109,3 +112,22 @@
 
 @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 @utility animate-rise { animation: rise 1.2s cubic-bezier(.2,.7,.2,1) both; }
+
+.entrance-section { height: 280svh; }
+.gallery-section { height: 300svh; }
+.collection-image { transition: transform 1.2s ease; }
+.collection-link:hover .collection-image { transform: scale(1.035); }
+.collection-heritage, .collection-festive { background: var(--burgundy); color: var(--primary-foreground); }
+.collection-gold, .collection-ivory { background: var(--ivory); color: var(--foreground); }
+.collection-temple { background: var(--secondary); color: var(--foreground); }
+.collection-modern { background: var(--card); color: var(--foreground); }
+@media (min-width: 768px) { .collection-reverse > :first-child { order: 2; } }
+@media (max-width: 767px) {
+  .entrance-section { height: 230svh; }
+  .gallery-section { height: 250svh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .reveal, .mask-reveal { opacity: 1; transform: none; clip-path: none; }
+}
