@@ -4,6 +4,8 @@ import s3 from "@/assets/s3.jpg";
 import s4 from "@/assets/s4.jpg";
 import s5 from "@/assets/s5.jpg";
 import s6 from "@/assets/s6.jpg";
+import festive from "@/assets/festive.jpg";
+import muse from "@/assets/muse.jpg";
 
 export const images = { s1, s2, s3, s4, s5, s6 };
 
@@ -50,6 +52,12 @@ export const products: Product[] = [
   { id: "haldi-banarasi", name: "Haldi Kadhwa Banarasi", category: "Banarasi", price: 26700,
     description: "Turmeric-toned Banarasi with a red meenakari border and floral jaal across the body.",
     colors: [{ name: "Haldi", swatch: sw.mustard, image: s5 }, { name: "Ruby", swatch: sw.red, image: s1 }], gallery: [s5, s1, s4] },
+  { id: "magenta-festive", name: "Magenta Celebration", category: "Banarasi", price: 31200, isNew: true,
+    description: "A creative collection study in magenta, with an ornate gold-toned border and a sweeping ceremonial drape.",
+    colors: [{ name: "Magenta", swatch: sw.rose, image: festive }], gallery: [festive] },
+  { id: "sage-modern-muse", name: "Silver Sage Muse", category: "Organza", price: 19800, isNew: true,
+    description: "A contemporary collection study in silver sage, with a luminous sheer finish and understated detailing.",
+    colors: [{ name: "Sage", swatch: sw.green, image: muse }], gallery: [muse] },
 ];
 
 export const categories: Category[] = ["Banarasi", "Organza", "Kanjivaram", "Bridal"];

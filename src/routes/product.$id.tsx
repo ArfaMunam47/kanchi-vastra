@@ -15,6 +15,8 @@ export const Route = createFileRoute("/product/$id")({
       { name: "description", content: loaderData.description },
       { property: "og:title", content: `${loaderData.name} — Kanchi Vastra` },
       { property: "og:description", content: loaderData.description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ] : [{ title: "Unavailable — Kanchi Vastra" }, { name: "robots", content: "noindex" }],
   }),
   component: ProductPage,

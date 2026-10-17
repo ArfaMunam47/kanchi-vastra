@@ -3,6 +3,7 @@ import { ShoppingBag, Minus, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useBag, subtotal } from "@/lib/bag";
 import { formatINR } from "@/lib/products";
+import { Button } from "@/components/ui/button";
 
 export function Header({ overlay = false }: { overlay?: boolean }) {
   const { items, setOpen } = useBag();
@@ -15,19 +16,18 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const count = items.reduce((s, i) => s + i.qty, 0);
   return (
     <>
-      <header className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${solid ? "bg-background/90 text-foreground backdrop-blur-md shadow-sm" : "bg-transparent text-primary-foreground"}`}>
+      <header className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${solid ? "bg-background/90 text-foreground backdrop-blur-md shadow-sm" : "pointer-events-none -translate-y-full opacity-0"}`}>
         <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between px-6 md:px-10">
           <nav className="hidden gap-8 eyebrow md:flex">
-            <a href="/#gallery" className="hover:text-accent">Exhibition</a>
-            <a href="/#collection" className="hover:text-accent">Bridal</a>
-            <a href="/#shop" className="hover:text-accent">Shop</a>
-            <a href="/#trends" className="hover:text-accent">Trends</a>
+            <Link to="/" hash="gallery" className="hover:text-accent">Exhibition</Link>
+            <Link to="/collections" className="hover:text-accent">Collections</Link>
+            <Link to="/" hash="shop" className="hover:text-accent">New Arrivals</Link>
           </nav>
           <Link to="/" className="font-display text-2xl tracking-[0.25em]">KANCHI VASTRA</Link>
-          <button onClick={() => setOpen(true)} className="relative flex items-center gap-2 eyebrow" aria-label="Open shopping bag">
+          <Button variant="ghost" onClick={() => setOpen(true)} className="relative flex items-center gap-2 eyebrow" aria-label="Open shopping bag">
             <ShoppingBag className="h-5 w-5" /> <span className="hidden md:inline">Bag</span>
             {count > 0 && <span className="absolute -right-3 -top-2 grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] text-primary-foreground">{count}</span>}
-          </button>
+          </Button>
         </div>
       </header>
       <BagDrawer />
