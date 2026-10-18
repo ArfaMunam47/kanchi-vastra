@@ -57,7 +57,7 @@ export function CurvedGallery() {
         <p className="eyebrow text-muted-foreground">The Exhibition</p>
         <div className="flex items-end justify-between gap-4"><h2 className="mt-2 text-4xl leading-none md:text-7xl">Woven to Be <span className="font-script text-primary">Remembered</span></h2><span className="hidden text-sm text-muted-foreground md:block">{String(Math.round(pos)+1).padStart(2,"0")} / {items.length}</span></div>
       </div>
-      <div ref={wrap} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={up}
+      <div ref={wrap} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={up} onPointerCancel={up}
          className="relative mt-8 h-[54svh] min-h-[240px] cursor-grab touch-pan-y select-none active:cursor-grabbing" style={{ perspective: "1400px" }}>
         <div className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
           {items.map((p, i) => {

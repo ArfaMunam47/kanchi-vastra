@@ -9,6 +9,7 @@ const Scene = lazy(() => import("./BoutiqueScene"));
 export function Boutique() {
   const section = useRef<HTMLElement>(null);
   const progress = useRef(0);
+  const entranceFrame = useRef(0);
   const [position, setPosition] = useState(0);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -21,7 +22,9 @@ export function Boutique() {
       progress.current = p; setPosition(p);
     };
     update(); addEventListener("scroll", update, { passive: true }); addEventListener("resize", update);
-    return () => { removeEventListener("scroll", update); removeEventListener("resize", update); };
+    const cancel = () => cancelAnimationFrame(entranceFrame.current);
+    addEventListener("wheel",cancel,{passive:true}); addEventListener("touchstart",cancel,{passive:true});
+    return () => { cancel(); removeEventListener("wheel",cancel); removeEventListener("touchstart",cancel); removeEventListener("scroll", update); removeEventListener("resize", update); };
   }, []);
   const enter = () => {
     const el = section.current; if (!el) return;
@@ -29,8 +32,9 @@ export function Boutique() {
     const start = scrollY, end = el.offsetTop + (el.offsetHeight-innerHeight)*.88;
     if(reduce) { scrollTo(0,end); return; }
     const time = performance.now();
-    const animate = (now: number) => { const t=Math.min(1,(now-time)/2600); const eased=t*t*(3-2*t); window.scrollTo({top:start+(end-start)*eased,behavior:"instant"}); if(t<1) requestAnimationFrame(animate); };
-    requestAnimationFrame(animate);
+    cancelAnimationFrame(entranceFrame.current);
+    const animate = (now: number) => { const t=Math.min(1,(now-time)/2600); const eased=t*t*(3-2*t); window.scrollTo({top:start+(end-start)*eased,behavior:"instant"}); if(t<1) entranceFrame.current=requestAnimationFrame(animate); };
+    entranceFrame.current=requestAnimationFrame(animate);
   };
   return (
     <section ref={section} className="entrance-section relative bg-ivory">
