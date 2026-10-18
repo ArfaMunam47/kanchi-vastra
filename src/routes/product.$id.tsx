@@ -30,9 +30,9 @@ function ProductPage() {
 function ProductView() {
   const p = Route.useLoaderData();
   const { add } = useBag();
-  const [color, setColor] = useState(p.colors[0]!);
-  const [view, setView] = useState(p.colors[0]!.image);
-  const [size, setSize] = useState(sizes[0]!);
+  const [color, setColor] = useState(p.colors[0] ?? { name: "Original", swatch: "var(--primary)", image: p.gallery[0] ?? "" });
+  const [view, setView] = useState(p.colors[0]?.image ?? p.gallery[0] ?? "");
+  const [size, setSize] = useState(sizes[0] ?? "Free Size");
   const [qty, setQty] = useState(1);
   const views = [color.image, ...p.gallery.filter((g) => g !== color.image)];
 
@@ -82,7 +82,7 @@ function ProductView() {
             <button onClick={() => add({ id: p.id, name: p.name, image: color.image, color: color.name, size, price: p.price, qty })}
               className="flex-1 rounded-full bg-primary py-4 eyebrow text-primary-foreground transition hover:bg-burgundy">Add to bag</button>
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">Free shipping across India · Handloom certified · 7-day returns</p>
+          <p className="mt-6 text-xs text-muted-foreground">Kanchi Vastra · Creative collection study</p>
         </div>
       </section>
       <section className="bg-ivory py-20">

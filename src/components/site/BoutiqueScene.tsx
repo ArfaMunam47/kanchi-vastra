@@ -57,7 +57,7 @@ export default function BoutiqueScene({ progress, onReady, onError }: { progress
       const silk = loader.load(silkTexture); silk.colorSpace=T.SRGBColorSpace; textures.push(silk);
       const fabric = new T.MeshStandardMaterial({map:silk,side:T.DoubleSide,roughness:.65});
       const cloth = (x: number,z: number) => {
-        const geo=new T.PlaneGeometry(1.4,2.6,32,24); const verts=geo.attributes.position;
+        const geo=new T.PlaneGeometry(1.4,2.6,32,24); const verts=geo.getAttribute("position");
         for(let i=0;i<verts.count;i++) { const vx=verts.getX(i),vy=verts.getY(i); verts.setZ(i,Math.sin(vx*17)*.075+(1.3-vy)*.03); }
         geo.computeVertexNormals(); const m=new T.Mesh(geo,fabric); m.position.set(x,2.5,z); scene.add(m);
         box(1.6,.04,.04,x,3.85,z,gold); box(.04,3.8,.04,x-.8,1.9,z,gold); box(.04,3.8,.04,x+.8,1.9,z,gold);

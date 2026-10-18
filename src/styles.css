@@ -121,7 +121,16 @@
 .collection-gold, .collection-ivory { background: var(--ivory); color: var(--foreground); }
 .collection-temple { background: var(--secondary); color: var(--foreground); }
 .collection-modern { background: var(--card); color: var(--foreground); }
-@media (min-width: 768px) { .collection-reverse > :first-child { order: 2; } }
+@media (min-width: 768px) {
+  .collection-reverse > :first-child { order: 2; }
+  .collection-gold > div { grid-template-columns: 1.2fr 1fr; }
+  .collection-gold .collection-link { aspect-ratio: 4 / 3; }
+  .collection-temple .collection-link { width: 82%; margin-inline: auto; border: 12px solid var(--gold); }
+  .collection-ivory .collection-link { aspect-ratio: 1; border-radius: 50% 50% 0 0; }
+  .collection-festive > div { grid-template-columns: 1fr 1.35fr; }
+  .collection-festive .collection-link { aspect-ratio: 4 / 3; }
+  .collection-modern .collection-link { width: 76%; margin-inline: auto; }
+}
 @media (max-width: 767px) {
   .entrance-section { height: 230svh; }
   .gallery-section { height: 250svh; }
