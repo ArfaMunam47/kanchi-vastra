@@ -1,6 +1,6 @@
 # Immersive boutique
-- [ ] Dimensional entrance with opening doors and camera journey
-- [ ] Native-scroll editorial gallery with drag and arrow alternatives
-- [ ] Six distinct collections and working collection views
-- [ ] Check entrance, gallery, products, mobile and reduced motion
-- [ ] Resume and finish remaining validation and errors
+- [x] Dimensional entrance with opening doors and camera journey
+- [x] Native-scroll editorial gallery with drag and arrow alternatives
+- [x] Six distinct collections and working collection views
+- [x] Check entrance, gallery, products, mobile and reduced motion
+- [x] Resume and finish remaining validation and errors
