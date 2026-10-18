@@ -3,3 +3,4 @@
 - [ ] Native-scroll editorial gallery with drag and arrow alternatives
 - [ ] Six distinct collections and working collection views
 - [ ] Check entrance, gallery, products, mobile and reduced motion
+- [ ] Resume and finish remaining validation and errors
