@@ -33,6 +33,11 @@
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-wood: var(--wood);
+  --color-glass: var(--glass);
+  --color-light: var(--light);
+  --color-emerald: var(--emerald);
+  --color-sage: var(--sage);
+  --color-rose: var(--rose);
   --font-display: "Cormorant Garamond", serif;
   --font-sans: "Jost", sans-serif;
   --font-script: "Pinyon Script", cursive;
@@ -64,6 +69,11 @@
   --gold: oklch(0.74 0.13 80);
   --ink: oklch(0.15 0.02 20);
   --wood: oklch(0.38 0.06 45);
+  --glass: oklch(0.92 0.012 175);
+  --light: oklch(0.92 0.065 80);
+  --emerald: oklch(0.38 0.085 160);
+  --sage: oklch(0.7 0.045 155);
+  --rose: oklch(0.55 0.15 355);
 }
 
 @layer base {
@@ -114,7 +124,12 @@
 @utility animate-rise { animation: rise 1.2s cubic-bezier(.2,.7,.2,1) both; }
 
 .entrance-section { height: 280svh; }
-.gallery-section { height: 300svh; }
+.gallery-section { height: 220svh; }
+.boutique-invitation { text-shadow: 0 2px 18px var(--ink); }
+.boutique-controls { background: color-mix(in oklab, var(--ink) 88%, transparent); }
+.boutique-control { border-color: color-mix(in oklab, var(--primary-foreground) 25%, transparent); }
+.boutique-control[aria-pressed="true"] { background: var(--primary-foreground); color: var(--ink); border-color: var(--primary-foreground); }
+.gallery-photo { box-shadow: 0 20px 45px color-mix(in oklab, var(--ink) 20%, transparent); }
 .collection-image { transition: transform 1.2s ease; }
 .collection-link:hover .collection-image { transform: scale(1.035); }
 .collection-heritage, .collection-festive { background: var(--burgundy); color: var(--primary-foreground); }
@@ -133,7 +148,7 @@
 }
 @media (max-width: 767px) {
   .entrance-section { height: 230svh; }
-  .gallery-section { height: 250svh; }
+  .gallery-section { height: 210svh; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
