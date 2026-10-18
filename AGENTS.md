@@ -12,3 +12,5 @@
 - Keep the immersive boutique renderer dynamically imported and initialize Three.js only after hydration; SSR must never initialize WebGL.
 - Drive entrance and gallery scenes from native document scrolling without body scroll locks, so visitors can always move onward.
 - Keep collection membership in the shared collections module and render collection views through TanStack routes, so navigation and products stay consistent.
+- Build the bespoke boutique as a metric-scale environment in a browser-only scene factory, sharing guided display viewpoints with its accessible controls; reuse the existing Three.js renderer to avoid a second engine.
+- Batch repeated static architectural and textile geometry by material, and keep camera paths inside the unobstructed central aisle; this preserves mobile performance and prevents furniture clipping.
