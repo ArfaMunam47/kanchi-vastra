@@ -61,7 +61,7 @@ export function Boutique() {
           <Button onClick={() => travel(.82)} variant="outline" className="mt-5 h-12 rounded-none border-primary-foreground/50 bg-ink/75 px-7 text-primary-foreground hover:bg-burgundy hover:text-primary-foreground">Enter the Atelier <ArrowRight /></Button>
         </div> : <div className="absolute inset-x-4 bottom-7 mx-auto max-w-3xl text-primary-foreground md:bottom-10">
           {view && <div className="boutique-controls mb-2 flex items-center justify-between gap-4 px-4 py-3" aria-live="polite">
-            <div><p className="font-display text-2xl">{view.name}</p><p className="mt-1 hidden text-sm text-primary-foreground/70 sm:block">{view.note}</p></div>
+            <div className="min-w-0"><p className="font-display text-xl sm:text-2xl">{view.name}</p><p className="mt-1 hidden text-sm text-primary-foreground/70 sm:block">{view.note}</p></div>
             <div className="flex shrink-0 items-center gap-2"><Button asChild variant="outline" className="rounded-none border-primary-foreground/30 bg-transparent text-primary-foreground hover:text-ink"><Link to="/collections/$id" params={{ id: view.id }}>Explore <ArrowRight /></Link></Button><Button onClick={clear} variant="ghost" size="icon" aria-label="Return to main store"><X /></Button></div>
           </div>}
           <div className="boutique-controls px-4 py-4">

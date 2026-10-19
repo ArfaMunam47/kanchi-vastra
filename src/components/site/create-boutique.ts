@@ -62,13 +62,13 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   scene.environment = environment.texture; scene.environmentIntensity = .48;
   environmentRoom.dispose(); pmrem.dispose();
   scene.add(new T.HemisphereLight(color("--ivory"), color("--wood"), .7));
-  const sun = new T.DirectionalLight(color("--ivory"), 2.4);
+  const sun = new T.DirectionalLight(color("--ivory"), 1.35);
   sun.position.set(-5, 9, 8); sun.castShadow = true;
   sun.shadow.mapSize.set(1024, 1024); sun.shadow.camera.left = -8; sun.shadow.camera.right = 8;
   sun.shadow.camera.top = 8; sun.shadow.camera.bottom = -8; sun.shadow.camera.near = .1; sun.shadow.camera.far = 35;
   sun.shadow.normalBias = .04; sun.shadow.bias = -.0004; scene.add(sun);
   for (const z of [-1.8, -5.3, -9]) {
-    const lamp = new T.PointLight(color("--light"), 32, 8, 2); lamp.position.set(0, 3.7, z); scene.add(lamp);
+    const lamp = new T.PointLight(color("--light"), 48, 8, 2); lamp.position.set(0, 3.7, z); scene.add(lamp);
   }
 
   // Facade: framed display glazing either side, recessed entrance and slim sign.
@@ -186,7 +186,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     for (const y of [1.12, 1.66, 2.2]) {
       box(.8, .065, 1.28, x, y, z + .65, wood);
       for (let j = 0; j < 3; j++) {
-        const fabric = fabricMats[(i + j) % fabricMats.length] ?? mat;
+        const fabric = fabricMats[i === 3 || i === 5 ? i : (i + j % 2) % fabricMats.length] ?? mat;
         box(.54, .075, .78, view.side * 4.75, y + .08 + j * .08, z + .65, fabric);
       }
       box(.035, .014, 1.24, view.side * 4.46, y - .03, z + .65, lightMat);

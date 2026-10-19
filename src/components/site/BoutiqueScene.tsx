@@ -43,19 +43,19 @@ export default function BoutiqueScene({ progress, focus, onReady, onError, onSel
         if (typeof id === "string") onSelect(id);
       };
       const tick = (time: number) => {
-        const dt = Math.min((time - lastTime) / 1000, .05); lastTime = time;
+        const dt = Math.min((time - lastTime) / 1000, .25); lastTime = time;
         if (visible) {
           const p = progress.current ?? 0;
           const opening = T.MathUtils.smoothstep(p, .025, .32);
           world.doors.forEach((door, i) => { door.rotation.y = (i === 0 ? 1 : -1) * opening * 1.48; });
-          const start = Math.max(9.5, 6.35 / (Math.tan(T.MathUtils.degToRad(25)) * camera.aspect));
+          const start = Math.max(8, 6.05 / (Math.tan(T.MathUtils.degToRad(25)) * camera.aspect));
           const travel = T.MathUtils.smoothstep(p, .12, .86);
           desired.set(0, 2.25 - travel * .42, start + (-4.35 - start) * travel);
-          desiredLook.set(0, 2.1 - travel * .2, -10.5);
+          desiredLook.set(0, 2.25 - travel * .35, -10.5);
           const selected = boutiqueViews.find(view => view.id === focus.current);
           if (selected && p > .55) {
-            desired.set(selected.side * 1.7, 1.85, selected.z + 1.15);
-            desiredLook.set(selected.side * 4.8, 2, selected.z);
+            desired.set(selected.side * 1.25, 1.9, selected.z + .55);
+            desiredLook.set(selected.side * 4.8, 1.95, selected.z);
           }
           const blend = reduced || first ? 1 : 1 - Math.exp(-3.6 * dt);
           camera.position.lerp(desired, blend); look.lerp(desiredLook, blend); camera.lookAt(look);

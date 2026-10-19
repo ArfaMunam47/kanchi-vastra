@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Sections";
@@ -35,7 +35,8 @@ function ProductView() {
   const [view, setView] = useState(p.colors[0]?.image ?? p.gallery[0] ?? "");
   const [size, setSize] = useState(sizes[0] ?? "Free Size");
   const [qty, setQty] = useState(1);
-  const views = [...new Set([color.image, ...p.gallery])];
+  const [zoomed, setZoomed] = useState(false);
+  const views = [...new Set(p.colors.map(c => c.image))];
 
   return (
     <main className="bg-background">
@@ -49,8 +50,9 @@ function ProductView() {
             </Button>
           ))}
         </div>
-        <div className="order-1 overflow-hidden bg-muted md:order-2">
-          <img key={view} src={view} alt={p.name} className="aspect-[3/4] w-full object-cover animate-rise transition-transform duration-[1.5s] hover:scale-110" />
+        <div className="relative order-1 overflow-hidden bg-muted md:order-2">
+          <img key={view} src={view} alt={p.name} className={`aspect-[3/4] w-full object-cover transition-transform duration-700 ${zoomed ? "scale-150" : "scale-100"}`} />
+          <Button variant="outline" size="icon" className="absolute bottom-4 right-4 rounded-none bg-background/90" aria-label={zoomed ? "Zoom out" : "Zoom into textile"} onClick={() => setZoomed(value => !value)}>{zoomed ? <ZoomOut /> : <ZoomIn />}</Button>
         </div>
         <div className="order-3 md:pt-10">
           <Link to="/" hash="shop" className="eyebrow text-muted-foreground hover:text-primary">← {p.category}</Link>
