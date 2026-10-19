@@ -7,8 +7,8 @@
 
 # Realistic luxury refinement
 - [x] Inspect current architecture and compare reference recordings
-- [ ] Rebuild facade, materials, lighting and coherent interior zones
-- [ ] Connect entrance movement, guided collection views and return controls
-- [ ] Refine editorial scrolling and product presentation
-- [ ] Verify complete desktop/mobile journey, fallback and reduced motion
-- [ ] Resume and complete the remaining refinement and checks
+- [x] Rebuild facade, materials, lighting and coherent interior zones
+- [x] Connect entrance movement, guided collection views and return controls
+- [x] Refine editorial scrolling and product presentation
+- [x] Verify complete desktop/mobile journey, fallback and reduced motion
+- [x] Resume and complete the remaining refinement and checks
