@@ -6,8 +6,9 @@
 - [x] Resume and finish remaining validation and errors
 
 # Realistic luxury refinement
-- [ ] Inspect current architecture and compare reference recordings
+- [x] Inspect current architecture and compare reference recordings
 - [ ] Rebuild facade, materials, lighting and coherent interior zones
 - [ ] Connect entrance movement, guided collection views and return controls
 - [ ] Refine editorial scrolling and product presentation
 - [ ] Verify complete desktop/mobile journey, fallback and reduced motion
+- [ ] Resume and complete the remaining refinement and checks
