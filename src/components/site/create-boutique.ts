@@ -157,6 +157,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   const cloth = (x: number, z: number, material: T.Material, w = .58, h = 2.15, rotation = 0) => {
     const geometry = new T.PlaneGeometry(w, h, 28, 32);
     const vertices = geometry.getAttribute("position");
+    if (!vertices) { geometry.dispose(); return; }
     for (let i = 0; i < vertices.count; i++) {
       const vx = vertices.getX(i), vy = vertices.getY(i);
       vertices.setZ(i, Math.sin(vx * 42) * .048 + Math.sin(vy * 2) * .025);
@@ -192,7 +193,8 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     }
     // Photography remains readable and garment-specific, never mapped as fabric.
     const photograph = new T.MeshBasicMaterial({ map: load(view.image), side: T.DoubleSide });
-    plane(1.08, 1.6, view.side * 4.42, 2.13, z - .58, photograph, angle);
+    const display = plane(1.08, 1.6, view.side * 4.42, 2.13, z - .58, photograph, angle);
+    display.userData["collectionId"] = view.id;
     text(view.shortName.toUpperCase(), 2.1, .3, view.side * 5.16, 3.35, z, "Jost", angle);
     box(.65, .08, 2.6, view.side * 4.85, 2.99, z, stone);
     box(.04, .016, 2.45, view.side * 4.49, 2.93, z, lightMat);
