@@ -29,10 +29,11 @@ export function Boutique() {
       if (p < .55) { focus.current = null; setSelected(null); }
     };
     const cancel = () => { cancelAnimationFrame(entranceFrame.current); clear(); };
+    const touchStart = () => cancelAnimationFrame(entranceFrame.current);
     const key = (event: KeyboardEvent) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) cancel(); };
     update(); addEventListener("scroll", update, { passive: true }); addEventListener("resize", update);
-    addEventListener("wheel", cancel, { passive: true }); addEventListener("touchstart", cancel, { passive: true }); addEventListener("keydown", key);
-    return () => { cancelAnimationFrame(entranceFrame.current); removeEventListener("wheel", cancel); removeEventListener("touchstart", cancel); removeEventListener("keydown", key); removeEventListener("scroll", update); removeEventListener("resize", update); };
+    addEventListener("wheel", cancel, { passive: true }); addEventListener("touchstart", touchStart, { passive: true }); addEventListener("touchmove", cancel, { passive: true }); addEventListener("keydown", key);
+    return () => { cancelAnimationFrame(entranceFrame.current); removeEventListener("wheel", cancel); removeEventListener("touchstart", touchStart); removeEventListener("touchmove", cancel); removeEventListener("keydown", key); removeEventListener("scroll", update); removeEventListener("resize", update); };
   }, [clear]);
   const travel = (target: number) => {
     const el = section.current; if (!el) return;

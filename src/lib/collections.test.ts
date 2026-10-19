@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { collections, collectionProducts } from "./collections";
+import { boutiqueViews } from "./boutique-tour";
 
 describe("Boutique collections", () => {
   it("represents all six requested collection directions", () => {
@@ -10,5 +11,9 @@ describe("Boutique collections", () => {
   });
   it("does not show unrelated products for an unknown collection", () => {
     expect(collectionProducts("missing-edit")).toEqual([]);
+  });
+  it("offers all six collection directions in the guided physical boutique", () => {
+    expect(boutiqueViews.map(view => view.id)).toEqual(["kanchipuram-heritage", "banarasi-gold", "temple", "ivory-heirlooms", "festive", "modern-muse"]);
+    expect(boutiqueViews.map(view => collectionProducts(view.id).length)).toEqual([2, 3, 2, 2, 3, 3]);
   });
 });

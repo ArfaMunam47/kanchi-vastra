@@ -76,6 +76,9 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   box(11.2, .18, 11.8, 0, -.02, -5.7);
   box(11.4, .88, .62, 0, 4.02, .25);
   box(11.7, .14, .88, 0, 4.5, .28);
+  box(26, 8, .4, 0, 8.55, -.2);
+  box(7, 5.2, .5, -9.25, 2.6, -.08);
+  box(7, 5.2, .5, 9.25, 2.6, -.08);
   box(11.7, .16, .75, 0, .08, .3);
   for (const side of [-1, 1]) {
     box(.52, 3.55, .62, side * 5.45, 1.85, .25);
@@ -180,7 +183,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     const x = view.side * 4.85, z = view.z;
     const angle = view.side < 0 ? Math.PI / 2 : -Math.PI / 2;
     const mat = fabricMats[i] ?? ivory;
-    box(.14, 3.3, 2.65, view.side * 5.27, 1.92, z, i === 0 || i === 4 ? red : wood);
+    box(.14, 3.3, 2.65, view.side * 5.27, 1.92, z, i === 0 || i === 4 ? red : i === 3 ? stone : wood);
     // Lower cabinets and slim shelves contain substantial folded textiles.
     box(.76, .66, 2.6, x, .4, z, wood);
     for (const y of [1.12, 1.66, 2.2]) {
