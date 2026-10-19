@@ -18,7 +18,7 @@ export default function BoutiqueScene({ progress, focus, onReady, onError, onSel
       renderer.outputColorSpace = T.SRGBColorSpace;
       renderer.toneMapping = T.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.1;
-      renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+      renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFShadowMap;
       host.appendChild(renderer.domElement);
       const world = createBoutique(renderer);
       const camera = new T.PerspectiveCamera(50, 1, .08, 100);
