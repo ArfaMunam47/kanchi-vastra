@@ -53,7 +53,7 @@ export function Boutique() {
     if (scrollY > 4) return;
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const timer = window.setTimeout(() => {
-      if (scrollY < 4 && !arrivalInterrupted.current) travel(.82, 6800);
+      if (scrollY < 4 && !arrivalInterrupted.current) travel(.94, 6800);
     }, reduceMotion ? 100 : 650);
     return () => window.clearTimeout(timer);
   }, [travel]);
