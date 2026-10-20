@@ -12,3 +12,8 @@
 - [x] Refine editorial scrolling and product presentation
 - [x] Verify complete desktop/mobile journey, fallback and reduced motion
 - [x] Resume and complete the remaining refinement and checks
+
+# Seamless store arrival
+- [x] Begin the home-page experience with an automatic camera journey through the open doors
+- [x] Remove the opening prompt and collection choices until visitors arrive inside
+- [x] Verify the start, interruptible natural scrolling, reduced motion and phone layout

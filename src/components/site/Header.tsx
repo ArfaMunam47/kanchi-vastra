@@ -9,7 +9,13 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const { items, setOpen } = useBag();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const f = () => setScrolled(window.scrollY > 80);
+    const f = () => {
+      const atelier = overlay ? document.getElementById("atelier") : null;
+      if (atelier) {
+        const range = Math.max(1, atelier.offsetHeight - window.innerHeight);
+        setScrolled(-atelier.getBoundingClientRect().top / range >= .87);
+      } else setScrolled(window.scrollY > 80);
+    };
     f(); window.addEventListener("scroll", f); return () => window.removeEventListener("scroll", f);
   }, []);
   const solid = !overlay || scrolled;
