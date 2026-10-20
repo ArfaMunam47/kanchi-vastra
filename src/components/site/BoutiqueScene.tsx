@@ -52,7 +52,7 @@ export default function BoutiqueScene({ progress, focus, onReady, onError, onSel
           const travel = T.MathUtils.smoothstep(p, .12, .86);
           camera.fov = 50 + travel * (camera.aspect < 1 ? 25 : 10); camera.updateProjectionMatrix();
           const aisleSway = Math.sin(Math.PI * travel) * .32;
-          desired.set(aisleSway, 2.25 - travel * .42, start + (-4.85 - start) * travel);
+          desired.set(aisleSway, 2.25 - travel * .42, start + (-2.8 - start) * travel);
           desiredLook.set(aisleSway * .7, 2.25 - travel * .35, -10.5);
           const selected = boutiqueViews.find(view => view.id === focus.current);
           if (selected && p > .55) {
