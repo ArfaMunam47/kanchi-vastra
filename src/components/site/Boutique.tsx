@@ -26,6 +26,7 @@ export function Boutique() {
       const el = section.current; if (!el) return;
       const range = Math.max(1, el.offsetHeight - innerHeight);
       const p = Math.max(0, Math.min(1, -el.getBoundingClientRect().top / range));
+      if (p > .005 && entranceFrame.current === 0) arrivalInterrupted.current = true;
       progress.current = p; setPosition(p);
       if (p < .55) { focus.current = null; setSelected(null); }
     };
