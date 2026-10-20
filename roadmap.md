@@ -16,4 +16,4 @@
 # Seamless store arrival
 - [x] Begin the home-page experience with an automatic camera journey through the open doors
 - [x] Remove the opening prompt and collection choices until visitors arrive inside
-- [ ] Verify the start, interruptible natural scrolling, reduced motion and phone layout
+- [x] Verify the start, interruptible natural scrolling, reduced motion and phone layout
