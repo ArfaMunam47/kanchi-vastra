@@ -6,6 +6,9 @@ import s5 from "@/assets/s5.jpg";
 import s6 from "@/assets/s6.jpg";
 import festive from "@/assets/festive.jpg";
 import muse from "@/assets/muse.jpg";
+import bridalClassics from "@/assets/bridal-classics.jpg";
+import contemporarySilks from "@/assets/contemporary-silks.jpg";
+import royalDrapes from "@/assets/royal-drapes.jpg";
 
 export const images = { s1, s2, s3, s4, s5, s6 };
 
@@ -22,7 +25,7 @@ export interface Product {
   isNew?: boolean;
 }
 
-const sw = { red: "oklch(0.45 0.17 25)", ivory: "oklch(0.95 0.03 85)", rose: "oklch(0.72 0.09 5)", green: "oklch(0.4 0.1 155)", mustard: "oklch(0.75 0.15 80)", crimson: "oklch(0.38 0.15 22)" };
+const sw = { red: "oklch(0.45 0.17 25)", ivory: "oklch(0.95 0.03 85)", rose: "oklch(0.72 0.09 5)", green: "oklch(0.4 0.1 155)", mustard: "oklch(0.75 0.15 80)", crimson: "oklch(0.38 0.15 22)", wine: "oklch(0.34 0.09 320)", blue: "oklch(0.78 0.05 250)" };
 
 export const products: Product[] = [
   { id: "ruby-banarasi", name: "Ruby Zari Banarasi", category: "Banarasi", price: 28900, isNew: true,
@@ -58,6 +61,15 @@ export const products: Product[] = [
   { id: "sage-modern-muse", name: "Silver Sage Muse", category: "Organza", price: 19800, isNew: true,
     description: "A contemporary collection study in silver sage, with a luminous sheer finish and understated detailing.",
     colors: [{ name: "Sage", swatch: sw.green, image: muse }], gallery: [muse] },
+  { id: "rosewood-bridal", name: "Rosewood Bridal Classic", category: "Bridal", price: 72000, isNew: true,
+    description: "A classic bridal drape in deep crimson silk with gold-toned embroidery and a sweeping zari pallu.",
+    colors: [{ name: "Crimson", swatch: sw.red, image: bridalClassics }, { name: "Wine", swatch: sw.wine, image: royalDrapes }], gallery: [bridalClassics, s6, royalDrapes] },
+  { id: "champagne-silk", name: "Champagne Contemporary Silk", category: "Organza", price: 22400, isNew: true,
+    description: "A feather-weight silk in champagne and powder blue with a clean satin border, styled for quiet modern celebrations.",
+    colors: [{ name: "Champagne", swatch: sw.ivory, image: contemporarySilks }, { name: "Powder Blue", swatch: sw.blue, image: contemporarySilks }], gallery: [contemporarySilks, s2, s3] },
+  { id: "royal-wine", name: "Royal Wine Kanjivaram", category: "Kanjivaram", price: 46800, isNew: true,
+    description: "A regal wine-purple silk with an ornate antique gold border and a temple-inspired pallu.",
+    colors: [{ name: "Wine", swatch: sw.wine, image: royalDrapes }, { name: "Mustard", swatch: sw.mustard, image: s5 }], gallery: [royalDrapes, s5, s1] },
 ];
 
 export const categories: Category[] = ["Banarasi", "Organza", "Kanjivaram", "Bridal"];
