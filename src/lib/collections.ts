@@ -1,6 +1,9 @@
 import { images, products } from "./products";
 import festive from "@/assets/festive.jpg";
 import muse from "@/assets/muse.jpg";
+import bridalClassics from "@/assets/bridal-classics.jpg";
+import contemporarySilks from "@/assets/contemporary-silks.jpg";
+import royalDrapes from "@/assets/royal-drapes.jpg";
 
 export const collections = [
   { id: "kanchipuram-heritage", name: "The Kanchipuram Heritage", note: "Silk, in its most expressive form.", description: "Jewel tones and architectural borders, inspired by the visual language of southern Indian textiles.", image: images.s4, ids: ["emerald-kanjivaram", "marigold-silk"], theme: "heritage" },
@@ -9,6 +12,9 @@ export const collections = [
   { id: "ivory-heirlooms", name: "The Ivory Heirlooms", note: "Quiet beauty, beautifully considered.", description: "Pearl, ivory and subtle gold accents in light, luminous occasion drapes.", image: images.s2, ids: ["ivory-organza-bloom", "pearl-organza"], theme: "ivory" },
   { id: "festive", name: "The Festive Edit", note: "For moments that deserve colour.", description: "Magenta, crimson and celebratory drapes with a confident, expressive spirit.", image: festive, ids: ["magenta-festive", "rani-bridal", "sindoor-bridal"], theme: "festive" },
   { id: "modern-muse", name: "The Modern Muse", note: "Tradition, with a new point of view.", description: "Silver sage, blush and feather-light silhouettes, styled with a contemporary sensibility.", image: muse, ids: ["sage-modern-muse", "rose-net-embroidered", "pearl-organza"], theme: "modern" },
+  { id: "bridal-classics", name: "Bridal Classics", note: "The morning you will always remember.", description: "Crimson silks and gold-toned embroidery — timeless bridal drapes for the wedding day itself.", image: bridalClassics, ids: ["rosewood-bridal", "rani-bridal"], theme: "bridal" },
+  { id: "contemporary-silks", name: "Contemporary Silks", note: "Light, luminous, unhurried.", description: "Champagne and powder-blue feather-weight silks with clean borders, styled for quiet modern celebrations.", image: contemporarySilks, ids: ["champagne-silk", "sage-modern-muse"], theme: "contemporary" },
+  { id: "royal-drapes", name: "The Royal Drapes", note: "Regal colour, worn with ease.", description: "Wine-purple silks with ornate antique gold borders — stately drapes with a ceremonial presence.", image: royalDrapes, ids: ["royal-wine", "ruby-banarasi"], theme: "royal" },
 ] as const;
 
 export const getCollection = (id: string) => collections.find(c => c.id === id);
