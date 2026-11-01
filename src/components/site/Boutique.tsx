@@ -12,11 +12,11 @@ export function Boutique() {
   const progress = useRef(0);
   const focus = useRef<string | null>(null);
   const entranceFrame = useRef(0);
-  const arrivalInterrupted = useRef(false);
   const [position, setPosition] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [traveling, setTraveling] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
   const onError = useCallback(() => setFailed(true), []);
   const select = useCallback((id: string) => { focus.current = id; setSelected(id); }, []);
@@ -26,12 +26,11 @@ export function Boutique() {
       const el = section.current; if (!el) return;
       const range = Math.max(1, el.offsetHeight - innerHeight);
       const p = Math.max(0, Math.min(1, -el.getBoundingClientRect().top / range));
-      if (p > .005 && entranceFrame.current === 0) arrivalInterrupted.current = true;
       progress.current = p; setPosition(p);
       if (p < .55) { focus.current = null; setSelected(null); }
     };
-    const cancel = () => { arrivalInterrupted.current = true; cancelAnimationFrame(entranceFrame.current); clear(); };
-    const touchStart = () => { arrivalInterrupted.current = true; cancelAnimationFrame(entranceFrame.current); };
+    const cancel = () => { cancelAnimationFrame(entranceFrame.current); setTraveling(false); clear(); };
+    const touchStart = () => cancelAnimationFrame(entranceFrame.current);
     const key = (event: KeyboardEvent) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) cancel(); };
     update(); addEventListener("scroll", update, { passive: true }); addEventListener("resize", update);
     addEventListener("wheel", cancel, { passive: true }); addEventListener("touchstart", touchStart, { passive: true }); addEventListener("touchmove", cancel, { passive: true }); addEventListener("keydown", key);
@@ -40,25 +39,20 @@ export function Boutique() {
   const travel = useCallback((target: number, duration = 2400) => {
     const el = section.current; if (!el) return;
     clear(); cancelAnimationFrame(entranceFrame.current);
+    setTraveling(true);
     const start = scrollY, end = el.offsetTop + (el.offsetHeight - innerHeight) * target;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { scrollTo({ top: end, behavior: "instant" }); return; }
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { scrollTo({ top: end, behavior: "instant" }); setTraveling(false); return; }
     const time = performance.now();
     const animate = (now: number) => {
       const t = Math.min(1, (now - time) / Math.max(1, duration)), eased = t * t * (3 - 2 * t);
       scrollTo({ top: start + (end - start) * eased, behavior: "instant" });
       if (t < 1) entranceFrame.current = requestAnimationFrame(animate);
+      else setTraveling(false);
     };
     entranceFrame.current = requestAnimationFrame(animate);
   }, [clear]);
-  useEffect(() => {
-    if (scrollY > 4) return;
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = window.setTimeout(() => {
-      if (scrollY < 4 && !arrivalInterrupted.current) travel(1, 7200);
-    }, reduceMotion ? 100 : 650);
-    return () => window.clearTimeout(timer);
-  }, [travel]);
   const view = boutiqueViews.find(view => view.id === selected);
+  const atStart = position < .06 && !traveling;
   return (
     <section ref={section} id="atelier" className="entrance-section relative bg-ivory">
       <h1 className="sr-only">Kanchi Vastra — The Saree Atelier</h1>
@@ -66,6 +60,14 @@ export function Boutique() {
         <ClientOnly><Suspense fallback={null}><Scene progress={progress} focus={focus} onReady={onReady} onError={onError} onSelect={select} /></Suspense></ClientOnly>
         {(!ready || failed) && <img src={facade} alt="Kanchi Vastra stone facade with glass doors and a warmly lit saree boutique" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/70 to-transparent" />
+        {atStart && ready && <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center text-primary-foreground">
+          <p className="font-script text-3xl text-gold drop-shadow md:text-4xl">Step inside</p>
+          <h2 className="boutique-invitation mt-3 font-display text-4xl leading-tight md:text-6xl">Step Into Our World</h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-primary-foreground/80 md:text-base">A guided walk through the atelier — heritage silks, bridal classics and the rooms beyond the doors.</p>
+          <Button size="lg" disabled={traveling} onClick={() => travel(1, 5200)} className="boutique-control mt-8 h-12 rounded-none px-10 font-display text-lg tracking-[0.2em] uppercase">
+            {traveling ? "Entering…" : "Enter the Atelier"}
+          </Button>
+        </div>}
         {position > .86 && <Button onClick={() => travel(0, 1400)} variant="outline" className="absolute left-5 top-20 rounded-none border-primary-foreground/30 bg-ink/70 text-primary-foreground hover:bg-burgundy hover:text-primary-foreground"><DoorOpen /> Entrance</Button>}
         {position > .86 && <div className="absolute inset-x-4 bottom-7 mx-auto max-w-3xl text-primary-foreground md:bottom-10">
           {view && <div className="boutique-controls mb-2 flex items-center justify-between gap-4 px-4 py-3" aria-live="polite">
@@ -74,7 +76,7 @@ export function Boutique() {
           </div>}
           <div className="boutique-controls px-4 py-4">
             <div className="mb-3 flex items-center justify-between gap-3"><p className="font-display text-xl">{view ? "The collection rooms" : "Inside the atelier"}</p><Button variant="ghost" className="h-8 px-0 text-primary-foreground hover:bg-transparent hover:text-gold" onClick={() => { clear(); document.getElementById("gallery")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" }); }}>The exhibition <ArrowDown /></Button></div>
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">{boutiqueViews.map(v => <Button key={v.id} onClick={() => select(v.id)} aria-pressed={v.id === selected} variant="outline" className="boutique-control h-10 rounded-none bg-transparent px-2 text-xs text-primary-foreground hover:bg-primary-foreground hover:text-ink">{v.shortName}</Button>)}</div>
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">{boutiqueViews.map(v => <Button key={v.id} onClick={() => select(v.id)} aria-pressed={v.id === selected} variant="outline" className="boutique-control h-10 rounded-none bg-transparent px-2 text-xs text-primary-foreground hover:bg-primary-foreground hover:text-ink">{v.shortName}</Button>)}</div>
             {selected && <Button onClick={clear} variant="ghost" className="mt-2 h-7 px-0 text-primary-foreground/75 hover:bg-transparent hover:text-primary-foreground"><ArrowLeft /> Main store</Button>}
           </div>
         </div>}
