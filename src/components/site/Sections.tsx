@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, ArrowUp } from "lucide-react";
 import s6 from "@/assets/s6.jpg";
 import s4 from "@/assets/s4.jpg";
 import drift from "@/assets/drift.jpg";
 import { categories, filterSort, products, type Category, type SortKey } from "@/lib/products";
+import { collections } from "@/lib/collections";
 import { ProductCard } from "./ProductCard";
+import { Button } from "@/components/ui/button";
 
 export function BridalCollection() {
   const bridal = products.filter((p) => p.category === "Bridal" || p.category === "Banarasi");
@@ -61,22 +65,42 @@ export function Catalog() {
 
 export function Trends() {
   return (
-    <section id="trends" className="overflow-hidden bg-background py-28">
-      <div className="mx-auto grid max-w-[1500px] items-center gap-10 px-6 md:grid-cols-2 md:px-10" data-reveal>
-        <h2 className="text-[18vw] font-semibold uppercase leading-[0.8] tracking-tight md:text-[10vw]">
-          <span className="mask-reveal">Latest</span><br /><span className="mask-reveal text-primary" style={{ transitionDelay: "150ms" }}>Trends</span>
-        </h2>
-        <div className="reveal relative">
-          <img src={s4} alt="Emerald Kanjivaram campaign" loading="lazy" className="ml-auto w-4/5 object-cover" />
-          <p className="absolute -bottom-6 left-0 max-w-[14rem] bg-background p-5 text-sm text-muted-foreground">Jewel tones and temple borders lead the season. Styled for the modern muse.</p>
+    <section id="trends" className="overflow-hidden bg-background">
+      <div className="mx-auto max-w-[1500px] px-6 pt-28 md:px-10">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-foreground/10 pb-10 reveal">
+          <div>
+            <p className="eyebrow text-primary">The Journal · Season III</p>
+            <h2 className="mt-3 text-6xl leading-none md:text-8xl">Latest<br /><span className="font-script text-gold">trends</span></h2>
+          </div>
+          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground reveal">Notes from the loom: jewel tones, temple borders and sheer layers — how this season is being worn, draped and remembered.</p>
+        </div>
+        <div className="mt-16 grid items-center gap-10 md:grid-cols-[2fr_1fr]" data-reveal>
+          <figure className="reveal">
+            <img src={s4} alt="Emerald Kanjivaram campaign" loading="lazy" className="aspect-[16/10] w-full object-cover" />
+            <figcaption className="mt-4 flex items-baseline justify-between gap-6 text-sm text-muted-foreground"><span className="font-display text-lg text-foreground">Temple Borders, Reimagined</span><span className="eyebrow">Chapter 01</span></figcaption>
+          </figure>
+          <div className="reveal space-y-8">
+            {["The Return of Kanjivaram", "Sheer Layers for the Evening", "Zari, Worn Softly"].map((t, i) => (
+              <div key={t} className="border-b border-foreground/10 pb-6">
+                <p className="eyebrow text-muted-foreground">Chapter {String(i + 2).padStart(2, "0")}</p>
+                <p className="mt-2 font-display text-2xl">{t}</p>
+              </div>
+            ))}
+            <Button asChild variant="link" className="h-12 border-b border-current px-0"><Link to="/collections">All collections <ArrowRight /></Link></Button>
+          </div>
         </div>
       </div>
-      <div className="relative mt-28" data-reveal>
-        <img src={drift} alt="Drift campaign in the dunes" loading="lazy" className="h-[80vh] w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/60 to-transparent" />
-        <div className="absolute bottom-14 left-6 text-primary-foreground md:left-14">
-          <h3 className="font-display text-7xl italic md:text-9xl"><span className="mask-reveal">Drift</span></h3>
-          <p className="reveal mt-2 max-w-sm text-primary-foreground/80">Sheer chiffons that move with the desert wind. The new campaign.</p>
+      <div className="relative mt-24" data-reveal>
+        <img src={drift} alt="Drift campaign in the dunes" loading="lazy" className="h-[85vh] w-full object-cover" />
+        <div className="absolute inset-0 bg-ink/45" />
+        <div className="absolute inset-0 mx-auto flex max-w-3xl flex-col items-center justify-center px-6 text-center text-primary-foreground">
+          <p className="eyebrow text-gold">The Finale · Campaign</p>
+          <h3 className="mt-4 font-display text-[18vw] italic leading-[0.85] md:text-[9vw]"><span className="mask-reveal">Drift</span></h3>
+          <div className="mt-6 h-px w-24 bg-gold" />
+          <p className="reveal mt-6 max-w-md text-sm leading-relaxed text-primary-foreground/85 md:text-base">Sheer chiffons that move with the desert wind. The season closes where it began — with cloth that feels like nothing, and is remembered like everything.</p>
+          <Button asChild variant="outline" className="boutique-control mt-8 h-12 rounded-none border-gold/60 bg-transparent px-10 font-display text-base tracking-[0.2em] uppercase text-primary-foreground hover:bg-gold hover:text-ink">
+            <Link to="/collections">Explore the Collections</Link>
+          </Button>
         </div>
       </div>
     </section>
@@ -84,11 +108,43 @@ export function Trends() {
 }
 
 export function Footer() {
+  const toTop = () => scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   return (
-    <footer className="bg-ink py-16 text-primary-foreground/70">
-      <div className="mx-auto flex max-w-[1500px] flex-wrap justify-between gap-8 px-6 md:px-10">
-        <p className="font-display text-3xl tracking-[0.25em] text-primary-foreground">KANCHI VASTRA</p>
-        <p className="text-sm">Handwoven in India · Shipped worldwide</p>
+    <footer className="bg-ink text-primary-foreground/70">
+      <div className="mx-auto max-w-[1500px] px-6 pb-10 pt-20 md:px-10">
+        <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 md:grid-cols-[1.4fr_1fr_1fr_auto]">
+          <div>
+            <p className="font-display text-3xl tracking-[0.25em] text-primary-foreground">KANCHI VASTRA</p>
+            <p className="mt-2 font-script text-2xl text-gold">The Saree Atelier</p>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed">Handwoven sarees from the looms of Kanchipuram and Banaras — heirloom silk, feather-light organza and bridal drapes, finished by master weavers.</p>
+            <p className="mt-6 eyebrow text-primary-foreground/50">Handwoven in India · Shipped worldwide</p>
+          </div>
+          <nav aria-label="Collections">
+            <p className="eyebrow text-gold">Collections</p>
+            <ul className="mt-5 space-y-2.5 text-sm">
+              {collections.map((c) => <li key={c.id}><Link to="/collections/$id" params={{ id: c.id }} className="transition-colors hover:text-gold">{c.name}</Link></li>)}
+            </ul>
+          </nav>
+          <nav aria-label="The atelier">
+            <p className="eyebrow text-gold">The Atelier</p>
+            <ul className="mt-5 space-y-2.5 text-sm">
+              <li><Link to="/" hash="atelier" className="transition-colors hover:text-gold">The Boutique</Link></li>
+              <li><Link to="/" hash="gallery" className="transition-colors hover:text-gold">The Exhibition</Link></li>
+              <li><Link to="/collections" className="transition-colors hover:text-gold">All Collections</Link></li>
+              <li><Link to="/" hash="shop" className="transition-colors hover:text-gold">New Arrivals</Link></li>
+              <li><Link to="/" hash="trends" className="transition-colors hover:text-gold">The Journal</Link></li>
+            </ul>
+          </nav>
+          <div className="flex flex-col items-start justify-between gap-6">
+            <Button onClick={toTop} variant="outline" className="h-11 rounded-none border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-gold hover:text-ink">
+              Back to top <ArrowUp />
+            </Button>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 text-xs text-primary-foreground/50">
+          <p>© {new Date().getFullYear()} Kanchi Vastra — The Saree Atelier</p>
+          <p>Crafted as an immersive showcase · Imagery is illustrative</p>
+        </div>
       </div>
     </footer>
   );

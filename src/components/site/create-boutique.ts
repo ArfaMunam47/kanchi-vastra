@@ -206,7 +206,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   }
   mannequin(-4.5, -.72, fabricMats[0] ?? ivory);
   cloth(-2.9, -.75, fabricMats[1] ?? red, .55, 1.9, 0, 1.78);
-  cloth(-2.3, -.65, fabricMats[2] ?? gold(), .5, 1.65, 0, 1.9);
+  cloth(-2.3, -.65, fabricMats[2] ?? ivory, .5, 1.65, 0, 1.9);
   stack(-3.6, .33, -.7, [3, 5, 1]);
   cloth(3.0, -.75, fabricMats[4] ?? ivory, .55, 2.1, 0, 1.8);
   cloth(3.62, -.65, fabricMats[3] ?? ivory, .52, 1.85, 0, 1.92);
@@ -274,7 +274,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     part(.62, .14, .58, 0, .35, 0, wood); part(.62, .62, .12, 0, .72, -.24, wood);
     part(.1, .3, .58, -.27, .5, 0, wood); part(.1, .3, .58, .27, .5, 0, wood);
     part(.56, .12, .5, 0, .46, .02, ivory); part(.5, .34, .1, 0, .82, -.18, ivory);
-    for (const [lx, lz] of [[-.26, -.24], [.26, -.24], [-.26, .24], [.26, .24]]) part(.05, .28, .05, lx, .14, lz, dark);
+    for (const [lx, lz] of [[-.26, -.24], [.26, -.24], [-.26, .24], [.26, .24]] as const) part(.05, .28, .05, lx, .14, lz, dark);
     scene.add(group);
   };
   chair(-4.15, -15.3, .7); chair(-2.25, -15.3, -.45);
