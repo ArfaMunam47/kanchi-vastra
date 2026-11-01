@@ -60,7 +60,7 @@ export function Boutique() {
         <ClientOnly><Suspense fallback={null}><Scene progress={progress} focus={focus} onReady={onReady} onError={onError} onSelect={select} /></Suspense></ClientOnly>
         {(!ready || failed) && <img src={facade} alt="Kanchi Vastra stone facade with glass doors and a warmly lit saree boutique" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/70 to-transparent" />
-        {atStart && (ready || failed) && <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center text-primary-foreground">
+        {atStart && <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 text-center text-primary-foreground">
           <p className="font-script text-3xl text-gold drop-shadow md:text-4xl">Step inside</p>
           <h2 className="boutique-invitation mt-3 font-display text-4xl leading-tight md:text-6xl">Step Into Our World</h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-primary-foreground/80 md:text-base">A guided walk through the atelier — heritage silks, bridal classics and the rooms beyond the doors.</p>
