@@ -264,8 +264,8 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   }
 
   // Consultation corner: rug, lounge chairs and a low table by the counter.
-  const rug = new T.Mesh(new T.PlaneGeometry(3.6, 2.6), red);
-  rug.rotation.x = -Math.PI / 2; rug.position.set(-3.2, .012, -15.4); rug.receiveShadow = true; scene.add(rug);
+  const rug = new T.Mesh(new T.PlaneGeometry(3.2, 2.4), red);
+  rug.rotation.x = -Math.PI / 2; rug.position.set(3, .012, -16); rug.receiveShadow = true; scene.add(rug);
   const chair = (x: number, z: number, ry: number) => {
     const group = new T.Group(); group.position.set(x, 0, z); group.rotation.y = ry;
     const part = (w: number, h: number, d: number, px: number, py: number, pz: number, mat: T.Material) => {
@@ -277,9 +277,9 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     for (const [lx, lz] of [[-.26, -.24], [.26, -.24], [-.26, .24], [.26, .24]] as const) part(.05, .28, .05, lx, .14, lz, dark);
     scene.add(group);
   };
-  chair(-4.15, -15.3, .7); chair(-2.25, -15.3, -.45);
+  chair(3.7, -16.4, .1); chair(2.25, -16.3, .55);
   const table = new T.Mesh(new T.CylinderGeometry(.42, .42, .4, 16), wood);
-  table.position.set(-3.2, .2, -15.4); table.castShadow = true; scene.add(table);
+  table.position.set(3.05, .2, -15.85); table.castShadow = true; scene.add(table);
 
   // Consultation counter on the rear wall, beneath the campaign artwork.
   box(3.5, 2.85, .12, 0, 2.45, -17.15, red);

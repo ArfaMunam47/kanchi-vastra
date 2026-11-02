@@ -19,10 +19,10 @@
 - [x] Verify the start, interruptible natural scrolling, reduced motion and phone layout
 
 # Final premium store refinement (brief: KANCHI_VASTRA_-_FINAL_PREMIUM_STORE_REFINEMENT)
-- [ ] Facade: wider deeper architecture, columns, sconces, prominent integrated signage, styled asymmetric windows
-- [ ] Interior: extend far beyond the doors with distinct zones, believable depth, consultation seating
-- [ ] Entrance: invitation + "Enter the Atelier" button, coordinated 4-6s cinematic sequence, no double triggers, reliable return
-- [ ] Collections: add Bridal Classics, Contemporary Silks, The Royal Drapes with distinct presentations
-- [ ] Ending: redesign the Trends/drift closing section as a premium editorial finale
-- [ ] Footer: full premium hierarchy with brand statement, collection and working navigation, back to top
-- [ ] Verify: desktop + mobile journey, vitest, console clean, nothing unrelated broken
+- [x] Facade: wider deeper architecture, columns, sconces, prominent integrated signage, styled asymmetric windows
+- [x] Interior: extend far beyond the doors with distinct zones, believable depth, consultation seating
+- [x] Entrance: invitation + "Enter the Atelier" button, coordinated 4-6s cinematic sequence, no double triggers, reliable return
+- [x] Collections: add Bridal Classics, Contemporary Silks, The Royal Drapes with distinct presentations
+- [x] Ending: redesign the Trends/drift closing section as a premium editorial finale
+- [x] Footer: full premium hierarchy with brand statement, collection and working navigation, back to top
+- [x] Verify: desktop + mobile journey, vitest, console clean, nothing unrelated broken
