@@ -46,14 +46,14 @@ export default function BoutiqueScene({ progress, focus, onReady, onError, onSel
         const dt = Math.min((time - lastTime) / 1000, .25); lastTime = time;
         if (visible) {
           const p = progress.current ?? 0;
-          const opening = T.MathUtils.smoothstep(p, .025, .32);
-          world.doors.forEach((door, i) => { door.rotation.y = (i === 0 ? 1 : -1) * opening * 1.48; });
-          const start = Math.max(8, 6.05 / (Math.tan(T.MathUtils.degToRad(25)) * camera.aspect));
+          // Doors part with a slight stagger, then the walk begins.
+          world.doors.forEach((door, i) => { door.rotation.y = (i === 0 ? 1 : -1) * T.MathUtils.smoothstep(p, .03 + i * .05, .32 + i * .05) * 1.48; });
+          const start = Math.min(11, Math.max(8, 6.05 / (Math.tan(T.MathUtils.degToRad(25)) * camera.aspect)));
           const travel = T.MathUtils.smoothstep(p, .12, .86);
           camera.fov = 50 + travel * (camera.aspect < 1 ? 25 : 10); camera.updateProjectionMatrix();
-          const aisleSway = Math.sin(Math.PI * travel) * .32;
-          desired.set(aisleSway, 2.25 - travel * .42, start + (-2.8 - start) * travel);
-          desiredLook.set(aisleSway * .7, 2.25 - travel * .35, -10.5);
+          const aisleSway = Math.sin(Math.PI * travel) * .3;
+          desired.set(aisleSway, 1.72 + travel * .33, start + (-3.6 - start) * travel);
+          desiredLook.set(aisleSway * .7, 1.82 + travel * .25, -10.5);
           const selected = boutiqueViews.find(view => view.id === focus.current);
           if (selected && p > .55) {
             desired.set(selected.side * 1.25, 1.9, selected.z + .55);
@@ -61,6 +61,8 @@ export default function BoutiqueScene({ progress, focus, onReady, onError, onSel
           }
           const blend = reduced || first ? 1 : 1 - Math.exp(-3.6 * dt);
           camera.position.lerp(desired, blend); look.lerp(desiredLook, blend); camera.lookAt(look);
+          // The light warms as the camera crosses the threshold.
+          renderer.toneMappingExposure = 1.02 + T.MathUtils.smoothstep(p, .3, .8) * .14;
           renderer.render(world.scene, camera);
           if (first) { first = false; onReady(); }
         }

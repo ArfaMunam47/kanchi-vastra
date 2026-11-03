@@ -64,7 +64,7 @@ export function Boutique() {
           <p className="font-script text-3xl text-gold drop-shadow md:text-4xl">Step inside</p>
           <h2 className="boutique-invitation mt-3 font-display text-4xl leading-tight md:text-6xl">Step Into Our World</h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-primary-foreground/80 md:text-base">A guided walk through the atelier — heritage silks, bridal classics and the rooms beyond the doors.</p>
-          <Button size="lg" disabled={traveling} onClick={() => travel(1, 5200)} className="boutique-control mt-8 h-12 rounded-none px-10 font-display text-lg tracking-[0.2em] uppercase">
+          <Button size="lg" disabled={traveling} onClick={() => travel(1, 5800)} className="boutique-control mt-8 h-12 rounded-none px-10 font-display text-lg tracking-[0.2em] uppercase">
             {traveling ? "Entering…" : "Enter the Atelier"}
           </Button>
         </div>}
