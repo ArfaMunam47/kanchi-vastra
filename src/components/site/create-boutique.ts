@@ -29,7 +29,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   };
   const stoneMap = load(stoneUrl, 3), woodMap = load(woodUrl, 2);
   const stone = new T.MeshStandardMaterial({ map: stoneMap, color: color("--ivory"), roughness: .88, bumpMap: stoneMap, bumpScale: .012 });
-  const floor = new T.MeshStandardMaterial({ map: stoneMap, color: color("--ivory"), roughness: .42, envMapIntensity: .55, bumpMap: stoneMap, bumpScale: .009 });
+  const floor = new T.MeshStandardMaterial({ map: stoneMap, color: color("--ivory"), roughness: .3, envMapIntensity: .85, bumpMap: stoneMap, bumpScale: .009 });
   const wood = new T.MeshStandardMaterial({ map: woodMap, roughness: .47, bumpMap: woodMap, bumpScale: .009 });
   const brass = new T.MeshStandardMaterial({ color: color("--gold"), metalness: .86, roughness: .38 });
   const red = new T.MeshStandardMaterial({ color: color("--burgundy"), roughness: .92 });
@@ -57,6 +57,17 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     const texture = new T.CanvasTexture(canvas); texture.colorSpace = T.SRGBColorSpace; textures.push(texture);
     return plane(w, h, x, y, z, new T.MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false }), ry);
   };
+  // Engaged stone columns with turned capitals and plinths carry the portico.
+  const column = (x: number, r: number) => {
+    const shaft = new T.Mesh(new T.CylinderGeometry(r, r + .025, 3.46, 18), stone);
+    shaft.position.set(x, 1.89, .22); shaft.castShadow = true; scene.add(shaft);
+    const neck = new T.Mesh(new T.CylinderGeometry(r + .035, r + .02, .08, 18), stone);
+    neck.position.set(x, 3.63, .22); scene.add(neck);
+    const cap = new T.Mesh(new T.BoxGeometry(r * 3.1, .16, r * 3.1), stone);
+    cap.position.set(x, 3.74, .22); cap.castShadow = true; scene.add(cap);
+    const plinth = new T.Mesh(new T.BoxGeometry(r * 3.1, .2, r * 3.1), stone);
+    plinth.position.set(x, .1, .22); plinth.castShadow = true; scene.add(plinth);
+  };
 
   const pmrem = new T.PMREMGenerator(renderer);
   const environmentRoom = new RoomEnvironment();
@@ -69,9 +80,28 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   sun.shadow.mapSize.set(1024, 1024); sun.shadow.camera.left = -9; sun.shadow.camera.right = 9;
   sun.shadow.camera.top = 10; sun.shadow.camera.bottom = -18; sun.shadow.camera.near = .1; sun.shadow.camera.far = 40;
   sun.shadow.normalBias = .04; sun.shadow.bias = -.0004; scene.add(sun);
-  for (const z of [-1.8, -5.3, -9, -12.9, -16.2]) {
-    const lamp = new T.PointLight(color("--light"), 40, 9, 2); lamp.position.set(0, 3.7, z); scene.add(lamp);
+  for (const z of [-1.8, -9, -16.2]) {
+    const lamp = new T.PointLight(color("--light"), 34, 9, 2); lamp.position.set(0, 3.8, z); scene.add(lamp);
   }
+  // Brass chandeliers mark the aisle: one over the presentation table, one grand.
+  const chandelier = (z: number, r: number) => {
+    const group = new T.Group(); group.position.set(0, 3.42, z);
+    const stem = new T.Mesh(new T.CylinderGeometry(.022, .022, .68, 8), brass); stem.position.y = .36; group.add(stem);
+    const ring = new T.Mesh(new T.TorusGeometry(r, .038, 10, 32), brass); ring.rotation.x = Math.PI / 2; ring.castShadow = true; group.add(ring);
+    for (let k = 0; k < 8; k++) {
+      const angle = (k / 8) * Math.PI * 2;
+      const drop = new T.Mesh(new T.CylinderGeometry(.009, .009, .08, 6), brass);
+      drop.position.set(Math.cos(angle) * r, .04, Math.sin(angle) * r); group.add(drop);
+      const bulb = new T.Mesh(new T.SphereGeometry(.05, 8, 8), lightMat);
+      bulb.position.set(Math.cos(angle) * r, .09, Math.sin(angle) * r); group.add(bulb);
+    }
+    group.add(new T.Mesh(new T.SphereGeometry(.08, 10, 8), brass));
+    const glow = new T.PointLight(color("--light"), 46, 10, 2); glow.position.y = -.12; group.add(glow);
+    scene.add(group);
+  };
+  chandelier(-6.8, .52); chandelier(-13.4, .66);
+  // Marble inlay borders frame the central aisle.
+  for (const side of [-1, 1]) box(.14, .012, 10.4, side * 1.9, .072, -6.2, red);
 
   // Facade: layered stone mass, pilastered bays, deep recesses and a bold fascia sign.
   box(34, .2, 36, 0, -.13, -4.5, floor);
@@ -90,9 +120,11 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   box(26.6, .3, .8, 0, 4.98, .02);
   box(25.6, .18, .6, 0, 5.24, -.03);
   box(26.6, .36, .72, 0, .2, .08);
+  for (let x = -12.4; x <= 12.41; x += .82) box(.2, .13, .16, x, 4.71, .1);
+  box(26.4, .14, .3, 0, 3.72, -.02);
   for (const side of [-1, 1]) {
-    box(.52, 3.55, .62, side * 5.45, 1.85, .25);
-    box(.35, 3.5, .65, side * 1.68, 1.83, .25);
+    column(side * 5.45, .21);
+    column(side * 1.62, .14);
     box(3.38, .12, .2, side * 3.55, .3, .51, wood);
     box(3.38, .12, .2, side * 3.55, 3.48, .51, wood);
     for (const x of [side * 1.88, side * 5.22]) box(.09, 3.12, .2, x, 1.88, .51, wood);
@@ -113,6 +145,17 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   text("THE SAREE ATELIER", 2.9, .21, 0, 3.76, .44, "Jost");
   for (let x = -16; x <= 16; x += 1.5) box(.012, .008, 15, x, -.02, 5.5, ivory);
   for (let z = 1; z < 13; z += 1.6) box(31, .008, .012, 0, -.02, z, ivory);
+  // Approach: stone landing and step, a burgundy runner and flanking planters.
+  box(5.4, .1, 1.15, 0, -.01, .55, floor);
+  box(5.4, .07, .55, 0, -.015, 1.3, floor);
+  box(2.4, .02, 2.6, 0, -.02, 3, red);
+  const leafMat = new T.MeshStandardMaterial({ color: color("--sage"), roughness: .95 });
+  for (const side of [-1, 1]) {
+    const pot = new T.Mesh(new T.CylinderGeometry(.3, .23, .55, 16), stone);
+    pot.position.set(side * 3.4, .2, 1.05); pot.castShadow = true; scene.add(pot);
+    const foliage = new T.Mesh(new T.SphereGeometry(.34, 10, 8), leafMat);
+    foliage.position.set(side * 3.4, .64, 1.05); foliage.scale.set(1, .78, 1); foliage.castShadow = true; scene.add(foliage);
+  }
 
   const doors = [-1, 1].map((side) => {
     const hinge = new T.Group(); hinge.position.set(side * 1.4, .12, -.1); scene.add(hinge);
@@ -129,6 +172,17 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     const pane = new T.Mesh(new T.PlaneGeometry(1.22, 2.77), glass); pane.position.set(cx, 1.76, 0); hinge.add(pane);
     const handle = new T.Mesh(new T.CylinderGeometry(.018, .018, .68, 12), brass);
     handle.position.set(-side * 1.2, 1.5, .15); hinge.add(handle);
+    // Applied mouldings, a brass kick plate and visible hinge barrels.
+    const lowerPanel = new T.Mesh(new T.BoxGeometry(.92, 1.02, .05), wood);
+    lowerPanel.position.set(cx, .98, .06); hinge.add(lowerPanel);
+    const upperPanel = new T.Mesh(new T.BoxGeometry(.92, .92, .05), wood);
+    upperPanel.position.set(cx, 2.44, .06); hinge.add(upperPanel);
+    const plate = new T.Mesh(new T.BoxGeometry(1.06, .26, .02), brass);
+    plate.position.set(cx, .21, .075); hinge.add(plate);
+    for (const hy of [.42, 2.82]) {
+      const barrel = new T.Mesh(new T.CylinderGeometry(.024, .024, .16, 10), brass);
+      barrel.position.set(-side * .05, hy, .09); hinge.add(barrel);
+    }
     return hinge;
   });
 
