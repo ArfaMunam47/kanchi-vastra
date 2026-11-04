@@ -107,7 +107,11 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   box(34, .2, 36, 0, -.13, -4.5, floor);
   box(4.6, .09, 1.2, 0, .045, 1.5, stone);
   box(11.2, .18, 11.8, 0, -.02, -5.7, floor);
-  box(26, 4.6, .45, 0, 2.3, -.28);
+  // Facade wall with a real doorway cut through: two flanks and a header.
+  box(11.55, 4.6, .45, -7.225, 2.3, -.28);
+  box(11.55, 4.6, .45, 7.225, 2.3, -.28);
+  box(2.9, 1.25, .45, 0, 3.975, -.28);
+  for (const side of [-1, 1]) box(.14, 3.35, .5, side * 1.52, 1.675, -.28, wood);
   box(7, 5.2, .5, -9.25, 2.6, -.08);
   box(7, 5.2, .5, 9.25, 2.6, -.08);
   for (const x of [-12.7, -7.35, 7.35, 12.7]) {
@@ -192,6 +196,7 @@ export function createBoutique(renderer: T.WebGLRenderer) {
     box(.15, .16, 16.2, side * 5.3, .16, -9.3, wood);
     box(.08, .06, 15.8, side * 5.22, 3.73, -9.3, lightMat);
   }
+  box(11.2, .15, .9, 0, 4.06, -.35, ivory);
   box(11, 4, .22, 0, 2, -17.4);
   box(11.2, .15, 17, 0, 4.06, -9.3, ivory);
   for (let k = 0; k < 6; k++) {
