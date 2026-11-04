@@ -85,8 +85,8 @@ export function createBoutique(renderer: T.WebGLRenderer) {
   }
   // Brass chandeliers mark the aisle: one over the presentation table, one grand.
   const chandelier = (z: number, r: number) => {
-    const group = new T.Group(); group.position.set(0, 3.42, z);
-    const stem = new T.Mesh(new T.CylinderGeometry(.022, .022, .68, 8), brass); stem.position.y = .36; group.add(stem);
+    const group = new T.Group(); group.position.set(0, 3.62, z);
+    const stem = new T.Mesh(new T.CylinderGeometry(.022, .022, .44, 8), brass); stem.position.y = .22; group.add(stem);
     const ring = new T.Mesh(new T.TorusGeometry(r, .038, 10, 32), brass); ring.rotation.x = Math.PI / 2; ring.castShadow = true; group.add(ring);
     for (let k = 0; k < 8; k++) {
       const angle = (k / 8) * Math.PI * 2;
@@ -96,10 +96,10 @@ export function createBoutique(renderer: T.WebGLRenderer) {
       bulb.position.set(Math.cos(angle) * r, .09, Math.sin(angle) * r); group.add(bulb);
     }
     group.add(new T.Mesh(new T.SphereGeometry(.08, 10, 8), brass));
-    const glow = new T.PointLight(color("--light"), 46, 10, 2); glow.position.y = -.12; group.add(glow);
+    const glow = new T.PointLight(color("--light"), 24, 8, 2); glow.position.y = -.2; group.add(glow);
     scene.add(group);
   };
-  chandelier(-6.8, .52); chandelier(-13.4, .66);
+  chandelier(-7.3, .42); chandelier(-13.4, .55);
   // Marble inlay borders frame the central aisle.
   for (const side of [-1, 1]) box(.14, .012, 10.4, side * 1.9, .072, -6.2, red);
 
