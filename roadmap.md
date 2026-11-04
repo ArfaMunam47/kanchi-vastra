@@ -26,3 +26,9 @@
 - [x] Ending: redesign the Trends/drift closing section as a premium editorial finale
 - [x] Footer: full premium hierarchy with brand statement, collection and working navigation, back to top
 - [x] Verify: desktop + mobile journey, vitest, console clean, nothing unrelated broken
+
+# Rebuilt royal entrance (brief: REBUILD_AND_PERFECT_THE_STORE_ENTRANCE)
+- [x] Grand facade: portico columns with capitals, dentil cornice, string course, steps, runner, planters, real doorway cut through the wall with wood jambs
+- [x] Doors: panels, kick plates, hinge barrels, staggered swing; walk-in camera at eye level through the opening into the showroom
+- [x] Showroom reveal: chandeliers, marble inlay aisle, polished floor, wide-angle settle; warmer exposure crossing the threshold
+- [x] Verified desktop + phone journey screenshots, zero console errors, typecheck and 16 tests pass
