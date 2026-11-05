@@ -32,3 +32,8 @@
 - [x] Doors: panels, kick plates, hinge barrels, staggered swing; walk-in camera at eye level through the opening into the showroom
 - [x] Showroom reveal: chandeliers, marble inlay aisle, polished floor, wide-angle settle; warmer exposure crossing the threshold
 - [x] Verified desktop + phone journey screenshots, zero console errors, typecheck and 16 tests pass
+
+# Real-footage entrance redesign (brief: IMPORTANT_COMPLETE_ENTRANCE_REDESIGN)
+- [ ] Inspect the supplied videos and identify real showroom footage suitable for the entrance
+- [ ] Replace the artificial 3D entrance with one photo/video-led cinematic arrival, preserving the site beyond the entrance
+- [ ] Verify playback/fallback, phone layout, navigation onward, typecheck and existing tests
