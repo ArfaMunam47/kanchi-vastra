@@ -34,6 +34,6 @@
 - [x] Verified desktop + phone journey screenshots, zero console errors, typecheck and 16 tests pass
 
 # Real-footage entrance redesign (brief: IMPORTANT_COMPLETE_ENTRANCE_REDESIGN)
-- [ ] Inspect the supplied videos and identify real showroom footage suitable for the entrance
-- [ ] Replace the artificial 3D entrance with one photo/video-led cinematic arrival, preserving the site beyond the entrance
-- [ ] Verify playback/fallback, phone layout, navigation onward, typecheck and existing tests
+- [x] Inspect supplied videos; confirm they are screen recordings, not usable real-world showroom footage
+- [x] Replace the artificial 3D entrance with one photographic storefront-to-showroom transition, preserving the site beyond the entrance
+- [x] Verify the image transition, phone layout, reduced motion, navigation onward, typecheck and existing tests
