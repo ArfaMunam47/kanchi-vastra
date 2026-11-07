@@ -77,8 +77,12 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     margin: 0;
     background-color: var(--color-background);
@@ -86,7 +90,12 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
 }
 
 @utility eyebrow {
@@ -102,51 +111,144 @@
 @utility reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
-  &.in { opacity: 1; transform: none; }
+  transition:
+    opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &.in {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @utility mask-reveal {
   display: inline-block;
   clip-path: inset(0 0 100% 0);
   transform: translateY(30%);
-  transition: clip-path 1.1s cubic-bezier(.7,0,.2,1), transform 1.1s cubic-bezier(.7,0,.2,1);
-  .in & { clip-path: inset(0 0 0 0); transform: none; }
+  transition:
+    clip-path 1.1s cubic-bezier(0.7, 0, 0.2, 1),
+    transform 1.1s cubic-bezier(0.7, 0, 0.2, 1);
+  .in & {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
 }
 
-@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
-@utility animate-rise { animation: rise 1.2s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@utility animate-rise {
+  animation: rise 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
 
-.entrance-section { height: 280svh; }
-.entrance-showroom { object-position: center 52%; }
-.gallery-section { height: 220svh; }
-.boutique-invitation { text-shadow: 0 2px 18px var(--ink); }
-.boutique-controls { background: color-mix(in oklab, var(--ink) 88%, transparent); }
-.boutique-control { border-color: color-mix(in oklab, var(--primary-foreground) 25%, transparent); }
-.boutique-control[aria-pressed="true"] { background: var(--primary-foreground); color: var(--ink); border-color: var(--primary-foreground); }
-.gallery-photo { box-shadow: 0 20px 45px color-mix(in oklab, var(--ink) 20%, transparent); }
-.collection-image { transition: transform 1.2s ease; }
-.collection-link:hover .collection-image { transform: scale(1.035); }
-.collection-heritage, .collection-festive { background: var(--burgundy); color: var(--primary-foreground); }
-.collection-gold, .collection-ivory { background: var(--ivory); color: var(--foreground); }
-.collection-temple { background: var(--secondary); color: var(--foreground); }
-.collection-modern { background: var(--card); color: var(--foreground); }
+.entrance-section {
+  height: 480svh;
+}
+.entrance-showroom {
+  object-position: center 52%;
+}
+.gallery-section {
+  height: 220svh;
+}
+.boutique-invitation {
+  text-shadow: 0 2px 18px var(--ink);
+}
+.boutique-controls {
+  background: color-mix(in oklab, var(--ink) 88%, transparent);
+}
+.boutique-control {
+  border-color: color-mix(in oklab, var(--primary-foreground) 25%, transparent);
+}
+.boutique-control[aria-pressed="true"] {
+  background: var(--primary-foreground);
+  color: var(--ink);
+  border-color: var(--primary-foreground);
+}
+.gallery-photo {
+  box-shadow: 0 20px 45px color-mix(in oklab, var(--ink) 20%, transparent);
+}
+.collection-image {
+  transition: transform 1.2s ease;
+}
+.collection-link:hover .collection-image {
+  transform: scale(1.035);
+}
+.collection-heritage,
+.collection-festive {
+  background: var(--burgundy);
+  color: var(--primary-foreground);
+}
+.collection-gold,
+.collection-ivory {
+  background: var(--ivory);
+  color: var(--foreground);
+}
+.collection-temple {
+  background: var(--secondary);
+  color: var(--foreground);
+}
+.collection-modern {
+  background: var(--card);
+  color: var(--foreground);
+}
 @media (min-width: 768px) {
-  .collection-reverse > :first-child { order: 2; }
-  .collection-gold > div { grid-template-columns: 1.2fr 1fr; }
-  .collection-gold .collection-link { aspect-ratio: 4 / 3; }
-  .collection-temple .collection-link { width: 82%; margin-inline: auto; border: 12px solid var(--gold); }
-  .collection-ivory .collection-link { aspect-ratio: 1; border-radius: 50% 50% 0 0; }
-  .collection-festive > div { grid-template-columns: 1fr 1.35fr; }
-  .collection-festive .collection-link { aspect-ratio: 4 / 3; }
-  .collection-modern .collection-link { width: 76%; margin-inline: auto; }
+  .collection-reverse > :first-child {
+    order: 2;
+  }
+  .collection-gold > div {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .collection-gold .collection-link {
+    aspect-ratio: 4 / 3;
+  }
+  .collection-temple .collection-link {
+    width: 82%;
+    margin-inline: auto;
+    border: 12px solid var(--gold);
+  }
+  .collection-ivory .collection-link {
+    aspect-ratio: 1;
+    border-radius: 50% 50% 0 0;
+  }
+  .collection-festive > div {
+    grid-template-columns: 1fr 1.35fr;
+  }
+  .collection-festive .collection-link {
+    aspect-ratio: 4 / 3;
+  }
+  .collection-modern .collection-link {
+    width: 76%;
+    margin-inline: auto;
+  }
 }
 @media (max-width: 767px) {
-  .entrance-section { height: 230svh; }
-  .gallery-section { height: 210svh; }
+  .entrance-section {
+    height: 230svh;
+  }
+  .gallery-section {
+    height: 210svh;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  .reveal, .mask-reveal { opacity: 1; transform: none; clip-path: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .mask-reveal {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
 }

@@ -1,4 +1,5 @@
 # 🪷 Kanchi Vastra
+
 ### Luxury Handwoven Sarees · A Digital Fashion Experience
 
 <p align="center">
@@ -27,16 +28,16 @@ More than a conventional shopping interface, Kanchi Vastra aims to create a digi
 
 ## ✨ Experience Highlights
 
-| Feature | Description |
-|---|---|
-| 🪷 **Luxury Storefront** | An elegant interface inspired by premium Indian textile boutiques. |
-| 🧵 **Textile Storytelling** | Visual presentation celebrating fabric, patterns, colors, and craftsmanship. |
-| 👑 **Editorial Design** | Fashion-inspired layouts, expressive typography, and sophisticated compositions. |
-| ✨ **Motion & Interactions** | Refined transitions and microinteractions that enhance the browsing experience. |
-| 🛍️ **Product Showcases** | Product-focused layouts designed to bring saree collections to life. |
-| 📱 **Responsive Design** | An interface designed to adapt across desktop, tablet, and mobile devices. |
+| Feature                      | Description                                                                      |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| 🪷 **Luxury Storefront**     | An elegant interface inspired by premium Indian textile boutiques.               |
+| 🧵 **Textile Storytelling**  | Visual presentation celebrating fabric, patterns, colors, and craftsmanship.     |
+| 👑 **Editorial Design**      | Fashion-inspired layouts, expressive typography, and sophisticated compositions. |
+| ✨ **Motion & Interactions** | Refined transitions and microinteractions that enhance the browsing experience.  |
+| 🛍️ **Product Showcases**     | Product-focused layouts designed to bring saree collections to life.             |
+| 📱 **Responsive Design**     | An interface designed to adapt across desktop, tablet, and mobile devices.       |
 
-*Features and implementation details will evolve as development progresses.*
+_Features and implementation details will evolve as development progresses._
 
 ---
 
@@ -57,16 +58,16 @@ The goal is to create a balance between cultural richness and a clean, contempor
 
 Built with a modern frontend development workflow.
 
-| Technology | Purpose |
-|---|---|
-| React | Component-based user interfaces |
-| TypeScript | Type-safe application development |
-| Tailwind CSS | Responsive styling and design consistency |
-| Modern CSS | Layout, transitions, and visual effects |
-| GSAP / Motion for React | Animation and interactive motion, where implemented |
-| Three.js / React Three Fiber | 3D experiences, where implemented |
+| Technology                   | Purpose                                             |
+| ---------------------------- | --------------------------------------------------- |
+| React                        | Component-based user interfaces                     |
+| TypeScript                   | Type-safe application development                   |
+| Tailwind CSS                 | Responsive styling and design consistency           |
+| Modern CSS                   | Layout, transitions, and visual effects             |
+| GSAP / Motion for React      | Animation and interactive motion, where implemented |
+| Three.js / React Three Fiber | 3D experiences, where implemented                   |
 
-*The final stack should reflect the dependencies actually used in the project.*
+_The final stack should reflect the dependencies actually used in the project._
 
 ---
 
@@ -134,10 +135,9 @@ This project is also an opportunity to experiment with advanced frontend develop
 ## 👩‍💻 About the Developer
 
 Arfa Munam Butt
-*Frontend Developer · Creative Developer*
+_Frontend Developer · Creative Developer_
 
 Exploring the boundaries of frontend engineering through interactive interfaces, immersive web experiences, animation, and visual storytelling.
-
 
 ---
 

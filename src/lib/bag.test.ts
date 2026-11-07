@@ -3,7 +3,15 @@ import { addItem, subtotal } from "./bag";
 import { filterSort, products } from "./products";
 
 describe("bag", () => {
-  const base = { id: "a", name: "A", image: "", color: "Ruby", size: "Free Size", price: 1000, qty: 1 };
+  const base = {
+    id: "a",
+    name: "A",
+    image: "",
+    color: "Ruby",
+    size: "Free Size",
+    price: 1000,
+    qty: 1,
+  };
   it("merges same variant and sums subtotal", () => {
     let items = addItem([], base);
     items = addItem(items, { ...base, qty: 2 });

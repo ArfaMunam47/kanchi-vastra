@@ -10,9 +10,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Kanchi Vastra — Luxury Handwoven Sarees" },
-      { name: "description", content: "Step inside an immersive saree boutique. Banarasi, Kanjivaram, organza and bridal drapes." },
+      {
+        name: "description",
+        content:
+          "Step inside an immersive saree boutique. Banarasi, Kanjivaram, organza and bridal drapes.",
+      },
       { property: "og:title", content: "Kanchi Vastra — Luxury Handwoven Sarees" },
-      { property: "og:description", content: "An immersive luxury saree boutique in your browser." },
+      {
+        property: "og:description",
+        content: "An immersive luxury saree boutique in your browser.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
